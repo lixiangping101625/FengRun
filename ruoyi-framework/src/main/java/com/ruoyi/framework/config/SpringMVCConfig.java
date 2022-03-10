@@ -1,6 +1,6 @@
 package com.ruoyi.framework.config;
 
-import com.ruoyi.framework.interceptor.TokenInterceptor;
+import com.ruoyi.framework.interceptor.PermissionInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.*;
@@ -12,13 +12,13 @@ import org.springframework.web.servlet.config.annotation.*;
 public class SpringMVCConfig extends WebMvcConfigurationSupport{
 
   @Bean
-  public TokenInterceptor getTokenInterceptor() {
-    return new TokenInterceptor();
+  public PermissionInterceptor getPermissionInterceptor() {
+    return new PermissionInterceptor();
   }
 
   @Override
   public void addInterceptors(InterceptorRegistry registry) {
-    InterceptorRegistration ir = registry.addInterceptor(getTokenInterceptor());
+    InterceptorRegistration ir = registry.addInterceptor(getPermissionInterceptor());
     ir.addPathPatterns("/**")
       .excludePathPatterns("/smsCode")
       .excludePathPatterns("/smsLogin")

@@ -1,4 +1,4 @@
-package com.ruoyi.web.vo;
+package com.ruoyi.system.domain.vo;
 
 import lombok.Data;
 
@@ -12,7 +12,5 @@ public class MobileLoginTokenVO implements Serializable {
 
     private String token;
     private Long userId;
-    private String loginTime;
-    private String expiredTime;
-
+    private boolean isNewUser;//是否新用户
 }

@@ -1,8 +1,10 @@
 package com.ruoyi;
 
+import com.ruoyi.common.utils.SnowflakeIdWorker;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+import org.springframework.context.annotation.Bean;
 
 /**
  * 启动程序
@@ -27,4 +29,10 @@ public class RuoYiApplication
                 " |  |  \\    /  \\      /           \n" +
                 " ''-'   `'-'    `-..-'              ");
     }
+
+//    @Bean
+//    public SnowflakeIdWorker snowflakeIdWorker(){
+//        SnowflakeIdWorker snowflakeIdWorker = new SnowflakeIdWorker(0, 0);
+//        return snowflakeIdWorker;
+//    }
 }

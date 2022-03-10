@@ -40,7 +40,7 @@ public class PermissionInterceptor extends HandlerInterceptorAdapter {
             throw new TokenAuthFailedException("token不能为空~");
         }
         //2、Token 验证(获取claims)
-        Map<String, Claim> claims = JwtTokenUtils.getClaims(token);
+        Map<String, Claim> claims = jwtConfig.getClaims(token);
         //3、scope
         //4、读取自定义注解@ScopeLevel
 //        ScopeLevel scopeLevel = this.getScopeLevel(handler);

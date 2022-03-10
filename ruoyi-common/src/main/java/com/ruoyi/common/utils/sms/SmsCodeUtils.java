@@ -1,4 +1,4 @@
-package com.ruoyi.common;
+package com.ruoyi.common.utils.sms;
 
 import java.util.Random;
 

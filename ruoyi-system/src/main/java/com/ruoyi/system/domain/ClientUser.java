@@ -19,7 +19,7 @@ public class ClientUser extends BaseEntity
     private static final long serialVersionUID = 1L;
 
     /** 主键 */
-    private String id;
+    private Long id;
 
     /** 手机号 */
     @Excel(name = "手机号")
@@ -55,12 +55,12 @@ public class ClientUser extends BaseEntity
     @Excel(name = "更新时间", width = 30, dateFormat = "yyyy-MM-dd")
     private Date updatedTime;
 
-    public void setId(String id) 
+    public void setId(Long id)
     {
         this.id = id;
     }
 
-    public String getId() 
+    public Long getId()
     {
         return id;
     }

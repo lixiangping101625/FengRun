@@ -115,3 +115,12 @@ xss:
   excludes: /system/notice
   # 匹配链接
   urlPatterns: /system/*,/monitor/*,/tool/*
+
+
+###########################
+#####短信
+###########################
+sms:
+  verifyCode:
+    len: 4 #验证码长度
+    expire: 3000 #有效时长

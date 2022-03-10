@@ -28,43 +28,43 @@ import java.util.Map;
 @Component
 public class JwtTokenUtils {
 
-    private static String secret;
-    private static Integer expire;
-    private static String header;
-    private static Integer defaultScope = 8;//C端用户无权限分别时，统一定义为8
+    private String secret;
+    private Integer expire;
+    private String header;
+    private Integer defaultScope = 8;//C端用户无权限分别时，统一定义为8
 
     @Value("${token.secret}")
     public void setSecret(String secret) {
-        JwtTokenUtils.secret = secret;
+        this.secret = secret;
     }
     @Value("${token.expire}")
     public void setExpire(Integer expire) {
-        JwtTokenUtils.expire = expire;
+        this.expire = expire;
     }
     @Value("${token.header}")
     public void setHeader(String header) {
-        JwtTokenUtils.header = header;
+        this.header = header;
     }
-    public static String getHeader() {
+    public String getHeader() {
         return header;
     }
 
     /**
      * 生成token
      * @param uId
-     * @param scope 权限判断：用户令牌的scope和访问api的scope作比较
+//     * @param scope 权限判断：用户令牌的scope和访问api的scope作比较
      * @return
      */
-    public static String makeToken(String uId, Integer scope){
-        return JwtTokenUtils.getToken(uId);
+    public String makeToken(String uId, Integer scope){
+        return getToken(uId);
     }
 //    public static String makeToken(String uId, Integer scope){
 //        return JwtTokenUtils.getToken(uId,scope);
 //    }
 
     //取默认等级
-    public static String makeToken(String uId){
-        return JwtTokenUtils.getToken(uId);
+    public String makeToken(String uId){
+        return getToken(uId);
     }
 //    public static String makeToken(String uId){
 //        return JwtTokenUtils.getToken(uId, JwtTokenUtils.defaultScope);
@@ -73,16 +73,16 @@ public class JwtTokenUtils {
     /**
      * 获取令牌
      * @param uId
-     * @param scope
+//     * @param scope
      * @return
      */
 //    public static String getToken(String uId, Integer scope){
-    public static String getToken(String uId){
+    public String getToken(String uId){
         //入参为加密盐值
-        Algorithm algorithm = Algorithm.HMAC256(JwtTokenUtils.secret);
+        Algorithm algorithm = Algorithm.HMAC256(this.secret);
 
         //签发时间
-        Map<String, Date> dateMap = JwtTokenUtils.calculateExpiredIssues();
+        Map<String, Date> dateMap = calculateExpiredIssues();
         return JWT.create()
                 .withClaim("uid", uId)//根据业务写入
 //                .withClaim("scope", scope)//根据业务写入
@@ -92,11 +92,11 @@ public class JwtTokenUtils {
                 .sign(algorithm);
     }
 
-    private static Map<String, Date> calculateExpiredIssues(){
+    private Map<String, Date> calculateExpiredIssues(){
         Map<String, Date> map = new HashMap<>();
         Calendar calendar = Calendar.getInstance();
         Date now = calendar.getTime();
-        calendar.add(Calendar.MINUTE, JwtTokenUtils.expire);
+        calendar.add(Calendar.MINUTE, this.expire);
         map.put("issueTime", now);
         map.put("expireTime", calendar.getTime());
         return map;
@@ -111,9 +111,9 @@ public class JwtTokenUtils {
      * @param token
      * @return
      */
-    public static Map<String, Claim> getClaims(String token){
+    public Map<String, Claim> getClaims(String token){
         Map<String, Claim> claims = null;
-        Algorithm algorithm = Algorithm.HMAC256(JwtTokenUtils.secret);
+        Algorithm algorithm = Algorithm.HMAC256(this.secret);
         JWTVerifier jwtVerifier = JWT.require(algorithm).build();
         DecodedJWT decodedJWT = null;
         try {
